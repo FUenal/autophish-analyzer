@@ -1,0 +1,64 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.card {
+    background-color: #F6F6F6;
+    border-color: #F6F6F6;
+    color: #000000;
+}
+
+.btn-primary {
+    background-color: #EB0000;
+    border-color: #EB0000;
+}
+
+.btn-primary:hover {
+    background-color: #EB0000;
+    border-color: #EB0000;
+}
+
+.table-dark {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.red-highlight {
+    color: #EB0000;
+}
+
+.table-container {
+    display: none; /* Hide the table container by default */
+}
+
+.btn-secondary {
+    background-color: #EB0000;
+    border-color: #EB0000;
+    color: #000;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background-color: #A20013;
+    border-color: #A20013;
+    color: #000;
+}
+
+.text-white {
+    color: #000000 !important;
+}
+
+.bg-dark {
+    background-color: #ffffff !important;
+}
+
+.bg-secondary {
+    background-color: #F6F6F6 !important;
+    color: #000000;
+}
+
+.benign-result {
+    color: #000000 !important; /* Ensure benign results are black */
+}

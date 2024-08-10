@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPhish Analyzer Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="mb-4" style="max-width: 300px;">
+        <h1 class="text-center">Analysis Results</h1>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Analyze Another File</a>
+            <a href="{{ url_for('results', filename=pdf_filename) }}" class="btn btn-primary">Download PDF</a>
+        </div>
+        <div class="card bg-secondary p-4 mt-3">
+            <h2>Summary</h2>
+            <canvas id="summaryChart" width="200" height="100"></canvas>
+            <script>
+                var ctx = document.getElementById('summaryChart').getContext('2d');
+                var summaryChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Malicious URLs', 'Suspicious URLs', 'Clean URLs'],
+                        datasets: [{
+                            label: 'URL Analysis Summary',
+                            data: [{{ metadata['total_malicious'] }}, {{ metadata['total_suspicious'] }}, {{ metadata['total_urls'] - metadata['total_malicious'] - metadata['total_suspicious'] }}],
+                            backgroundColor: ['#A20013', '#EB0000', 'green'],
+                            borderColor: ['#A20013', '#EB0000', 'green'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            title: {
+                                display: true,
+                                text: 'URL Analysis Summary',
+                                font: {
+                                    size: 20
+                                }
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+
+        <div class="card bg-secondary p-4 mt-3">
+            <h2>Email Header/Content Analysis</h2>
+            <table class="table table-dark">
+                <tr>
+                    <th>SPF and DKIM Authentication Results:</th>
+                    <td>{{ metadata['auth_results'] }}</td>
+                </tr>
+                <tr>
+                    <th>Sender IP Address:</th>
+                    <td>{{ metadata['ip_address'] }}</td>
+                </tr>
+                <tr>
+                    <th>Reverse DNS:</th>
+                    <td>{{ metadata['domain_name'] }}</td>
+                </tr>
+                <tr>
+                    <th>From Email Address:</th>
+                    <td>{{ metadata['from_address'] }}</td>
+                </tr>
+                <tr>
+                    <th>Return Path Email Address:</th>
+                    <td>{{ metadata['return_path'] }}</td>
+                </tr>
+                <tr>
+                    <th>Subject Line:</th>
+                    <td>{{ metadata['subject'] }}</td>
+                </tr>
+                <tr>
+                    <th>Recipient Email Addresses:</th>
+                    <td>{{ metadata['recipients'] }}</td>
+                </tr>
+                <tr>
+                    <th>Cc Email Addresses:</th>
+                    <td>{{ metadata['cc_addresses'] }}</td>
+                </tr>
+                <tr>
+                    <th>Date:</th>
+                    <td>{{ metadata['date'] }}</td>
+                </tr>
+                <tr>
+                    <th>Reply to:</th>
+                    <td>{{ metadata['reply_to'] }}</td>
+                </tr>
+                <tr>
+                    <th>URLs:</th>
+                    <td>{% for url in metadata['urls'] %}{{ url }}<br>{% endfor %}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card bg-secondary p-4 mt-3">
+            <h2>VirusTotal URL Check Results</h2>
+            {{ result|safe }}
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Analyze Another File</a>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('.table-toggle').click(function() {
+                    $(this).next('.table-container').toggle();
+                });
+                // Collapse all tables by default
+                $('.table-container').hide();
+            });
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPhish Analyzer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="container text-center">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="mb-4" style="max-width: 300px;">
+        <h1 class="text-center mb-4">AutoPhish Analyzer</h1>
+        <div class="card bg-secondary p-4 mx-auto" style="max-width: 500px;">
+            <form method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.eml_file.label(class="form-control-label") }}
+                    {{ form.eml_file(class="form-control-file") }}
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary btn-block") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
