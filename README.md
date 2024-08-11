@@ -2,7 +2,7 @@
 
 ## Description
 
-The **AutoPhish Analyzer** is a Python-based application designed to assist cybersecurity analysts in analyzing phishing emails efficiently. By automating the extraction of key information, such as email headers, URLs, and attachments, and checking these elements against security databases like VirusTotal, this app significantly reduces the time required to assess potentially malicious emails. This tool enhances the security posture of an organization by enabling faster identification and response to phishing threats, ultimately helping to mitigate the risk of successful phishing attacks.
+The **AutoPhish Analyzer** is a Python-based application designed to assist cybersecurity analysts in analyzing phishing emails efficiently. By automating the extraction of key information, such as email headers, URLs, and attachments, and checking these elements against the security databases VirusTotal, this app significantly reduces the time required to assess potentially malicious emails. This tool enhances the security posture of an organization by enabling faster identification and response to phishing threats, ultimately helping to mitigate the risk of successful phishing attacks.
 
 <div style="text-align: center;">
   <strong>Please Note: This is an ongoing Project and will be modified and expanded soon</strong>
